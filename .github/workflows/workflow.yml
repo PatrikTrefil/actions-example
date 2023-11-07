@@ -19,6 +19,29 @@ jobs:
       - name: Run example
         run: node index.js
 
+  nodejs-example-parallel:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: nodejs-example
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+      - name: Run in parallel
+        run: node index.js
+
+  nodejs-example-dependency:
+    runs-on: ubuntu-latest
+    needs: [nodejs-example, nodejs-example-parallel]
+    defaults:
+      run:
+        working-directory: nodejs-example
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+      - name: Run in parallel
+        run: node index.js
+
   website-example:
     runs-on: ubuntu-latest
     defaults:
