@@ -1,0 +1,29 @@
+{
+  "name": "caching-example",
+  "version": "1.0.0",
+  "description": "Example of caching dependencies in Github Actions",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PatrikTrefil/actions-example.git"
+  },
+  "keywords": [
+    "example",
+    "caching",
+    "github actions"
+  ],
+  "author": "Patrik Trefil",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/PatrikTrefil/actions-example/issues"
+  },
+  "homepage": "https://github.com/PatrikTrefil/actions-example#readme",
+  "dependencies": {
+    "winston": "^3.11.0"
+  }
+}

@@ -65,3 +65,22 @@ jobs:
 
       - name: Deploy Project Artifacts to Vercel
         run: vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }}
+
+  caching-example:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: caching-example
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: npm
+          cache-dependency-path: caching-example/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run example
+        run: npm run start
