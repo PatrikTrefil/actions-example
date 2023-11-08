@@ -2,10 +2,10 @@ name: Example workflow
 
 on:
   push:
-    branches: [main]
+    branches: [main] # don't run workflow on pushes to other branches
   pull_request:
-    branches: [main]
-  workflow_dispatch:
+    branches: [main] # run workflow when a pull request is opened or updated
+  workflow_dispatch: # allows manual trigger
 
 jobs:
   nodejs-example:
@@ -15,7 +15,9 @@ jobs:
         working-directory: nodejs-example
     steps:
       - uses: actions/checkout@v3
+
       - uses: actions/setup-node@v3
+
       - name: Run example
         run: node index.js
 
@@ -48,10 +50,12 @@ jobs:
       run:
         working-directory: website-example
     env:
+      # Secrets are configured on github.com in repository settings
       VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
       VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
     steps:
       - uses: actions/checkout@v3
+
       - name: Install Vercel CLI
         run: npm install --global vercel
 
@@ -77,6 +81,7 @@ jobs:
         with:
           node-version: 18
           cache: npm
+          # The lock-file is not in the root of the repository so we need to specify the path
           cache-dependency-path: caching-example/package-lock.json
 
       - name: Install dependencies
@@ -87,6 +92,7 @@ jobs:
 
   matrix-example:
     strategy:
+      # run for all combinations
       matrix:
         node-version: [16, 18]
         os: [ubuntu-latest, macos-latest, windows-latest]
